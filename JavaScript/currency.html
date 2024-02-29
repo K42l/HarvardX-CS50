@@ -1,0 +1,33 @@
+<!--
+This file needs to run on a server, otherwise it will throw a CORS error
+I used Python to run a local http server so i could test it
+python -m http.server
+This command will run a server at the address http://127.0.0.1:8000
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Currency Exchange
+        </title>
+        <script type="module" src="./currency.js"></script>
+    </head>
+    <body>
+        <h1>To get a free API key visit the <a href="https://www.exchangerate-api.com" target="_blank">Exchange Rate API</a></h1>
+        <form>
+            <input type="text" placeholder="Your API key" id="apiKey">
+            <select name="" id="base">
+                <option value="">From</option>
+            </select>
+            <select name="" id="currency">
+                <option value="">To</option>
+            </select>
+            <!--<input type="currency" placeholder="Type in the base currency" id="base">
+            <input type="currency" placeholder="Type in the currency" id="currency">-->
+            <input type="submit">
+        </form>
+        <br />
+        <hr>
+        <div id="apiReturn"></div>
+    </body>
+</html>
