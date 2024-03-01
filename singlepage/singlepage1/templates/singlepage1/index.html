@@ -1,0 +1,44 @@
+{% extends "singlepage1/layout.html" %}
+
+{% block body %}
+<script>
+    window.onpopstate = event => {
+        showSection(event.state.section)
+    }
+
+    function showSection(section){
+        fetch(`/singlepage1/sections/${section}`)
+        .then(response => response.text())
+        .then(text => {
+            document.querySelector("#content").innerHTML = text
+        })
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("button").forEach(button => {
+            button.onclick = function() {
+                const section = this.dataset.section
+                history.pushState({section: section}, "", `/singlepage1/section${section}`)
+                showSection(section)
+            }
+        })
+    })
+</script>
+
+<h1>Load Sections</h1>
+<div class="col-3">
+    <div class="row mb-3 g-1">
+        <div class="col">
+            <button data-section="1" class="btn btn-success">Section 1</button>
+        </div>
+        <div class="col">
+            <button data-section="2" class="btn btn-success">Section 2</button>
+        </div>
+        <div class="col">
+            <button data-section="3" class="btn btn-success">Section 3</button>
+        </div>
+    </div>
+</div>
+
+<div id="content" class="col-md-4"></div>
+{% endblock %}
